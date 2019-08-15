@@ -10,8 +10,6 @@ from keras.layers import Flatten, Dense, Lambda
 from keras.layers import Convolution2D, MaxPooling2D, Cropping2D
 
 import matplotlib.pyplot as plt
-
-# C:\Users\uwe_e\code\carnd\term1\projects\carnd-term1-3_behavioral_cloning
         
 def process_image(image):
     return image
@@ -41,20 +39,6 @@ def readAndPreprocessData(csv_file):
             # add images and angles to data set
             car_images.extend([img_center, img_left, img_right])
             steering_angles.extend([steering_center, steering_left, steering_right])
-
-print(X_train.shape)
-print(y_train.shape)
-
-#images_flipped = np.fliplr(car_images)
-
-#X_train_flipped = np.array(images_flipped)
-#y_train_flipped = - np.array(steering_angles)
-
-#plt.imshow(X_train_flipped[0])
-#plt.show()
-
-#print(X_train_flipped.shape)
-#print(y_train_flipped.shape)
 
 config = tf.ConfigProto()
 #config.log_device_placement = True 
