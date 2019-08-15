@@ -16,6 +16,9 @@ from keras.models import load_model
 import h5py
 from keras import __version__ as keras_version
 
+import tensorflow as tf
+from keras.backend.tensorflow_backend import set_session
+
 sio = socketio.Server()
 app = Flask(__name__)
 model = None
@@ -109,6 +112,14 @@ if __name__ == '__main__':
         help='Path to image folder. This is where the images from the run will be saved.'
     )
     args = parser.parse_args()
+    
+    config = tf.ConfigProto()
+    #config.log_device_placement = True 
+    config.gpu_options.allow_growth = True
+    config.gpu_options.per_process_gpu_memory_fraction = 0.9
+                                    
+    sess = tf.Session(config=config)
+    set_session(sess)  # set this TensorFlow session as the default session for Keras
 
     # check that model Keras version is same as local Keras version
     f = h5py.File(args.model, mode='r')
